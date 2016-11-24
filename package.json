@@ -13,7 +13,7 @@
     "npm": "1.2.x"
   },
   "scripts": {
-    "start": "node node_modules/gulp-cli/bin/gulp",
+    "start": "gulp",
     "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha ./test/**/*.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
@@ -47,6 +47,8 @@
   },
   "devDependencies": {
     "browser-sync": "^2.17.6",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "coveralls": "^2.11.15",
     "dotenv": "^2.0.0",
     "eslint": "^3.10.2",
