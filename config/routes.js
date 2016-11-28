@@ -3,6 +3,8 @@ var async = require('async');
 module.exports = function(app, passport, auth) {
     //User Routes
     var users = require('../app/controllers/users');
+
+    const authentication = require('../app/controllers/api/auth.js');
     app.get('/signin', users.signin);
     app.get('/signup', users.signup);
     app.get('/chooseavatars', users.checkAvatar);
@@ -91,7 +93,6 @@ module.exports = function(app, passport, auth) {
     app.get('/', index.render);
 
     //login api
-    const authentication = require('../app/controllers/api/auth.js');
     app.post('/api/auth/login', authentication.login);
 
 };

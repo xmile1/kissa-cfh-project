@@ -11,20 +11,19 @@ let bcrypt = require('bcryptjs');
 class Auth  {
 
   login(req, res){
-    console.log(req.body)
     User.findOne({email: req.body.email}, (err, user) => {
       if(err) {
-        res.send(err);
+        res.status(500).send(err);
       }
       if(!user){
-        res.json({
+        res.status(401).json({
           success: false,
           message: 'Authentication failed. User not found'
         });
       } else if (user){
         //if user exits but wrong password
         if(!user.authenticate(req.body.password)) {
-          res.json({
+          res.status(401).json({
             success: false,
             message: 'Authentication failed. Invalid Password'
           });
@@ -32,7 +31,7 @@ class Auth  {
           let token = jwt.sign (user, "kjzdfhkjhfghzkjvhkashd,hdjgvmbxmvzbvbc",{
             expiresIn: '24h'
           });
-          res.json({
+          res.status(200).json({
             success: true,
             message: 'Authentication successful. User logged in',
             token: token
