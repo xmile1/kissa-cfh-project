@@ -13,25 +13,26 @@ var cfhPlayer2 = {'name':'Sally'};
 var cfhPlayer3 = {'name':'Dana'};
 
 describe("Game Server",function(){
-
+  this.timeout(15000);
   it('Should accept requests to joinGame', function(done) {
     var client1 = io.connect(socketURL, options);
     var disconnect = function() {
       client1.disconnect();
-      // done();
+      done();
     };
     client1.on('connect', function(data){
       client1.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: false});
       setTimeout(disconnect,200);
     });
-    done();
+    // done();
   });
 
   it('Should send a game update upon receiving request to joinGame', function(done) {
+    this.timeout(15000);
     var client1 = io.connect(socketURL, options);
     var disconnect = function() {
       client1.disconnect();
-      // done();
+      done();
     };
     client1.on('connect', function(data){
       client1.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: false});
@@ -40,16 +41,17 @@ describe("Game Server",function(){
       });
       setTimeout(disconnect,200);
     });
-    done();
+    // done();
   });
 
   it('Should announce new user to all users', function(done){
+    this.timeout(15000);
     var client1 = io.connect(socketURL, options);
     var client2;
     var disconnect = function() {
       client1.disconnect();
       client2.disconnect();
-      // done();
+      done();
     };
     client1.on('connect', function(data){
       client1.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: false});
@@ -62,17 +64,18 @@ describe("Game Server",function(){
       });
       setTimeout(disconnect,200);
     });
-    done();
+    // done();
   });
 
   it('Should start game when startGame event is sent with 3 players', function(done){
+    this.timeout(15000);
     var client1, client2, client3;
     client1 = io.connect(socketURL, options);
     var disconnect = function() {
       client1.disconnect();
       client2.disconnect();
       client3.disconnect();
-      // done();
+      done();
     };
     var expectStartGame = function() {
       client1.emit('startGame');
@@ -99,10 +102,11 @@ describe("Game Server",function(){
         });
       });
     });
-    done();
+    // done();
   });
 
   it('Should automatically start game when 6 players are in a game', function(done){
+    this.timeout(15000);
     var client1, client2, client3, client4, client5, client6;
     client1 = io.connect(socketURL, options);
     var disconnect = function() {
@@ -112,7 +116,7 @@ describe("Game Server",function(){
       client4.disconnect();
       client5.disconnect();
       client6.disconnect();
-      // done();
+      done();
     };
     var expectStartGame = function() {
       client1.emit('startGame');
@@ -167,6 +171,6 @@ describe("Game Server",function(){
         }
       });
     });
-    done();
+    // done();
   });
 });
