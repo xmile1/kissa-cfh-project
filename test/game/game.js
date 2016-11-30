@@ -17,19 +17,18 @@ describe("Game Server",function(){
     var client1 = io.connect(socketURL, options);
     var disconnect = function() {
       client1.disconnect();
-      done();
     };
     client1.on('connect', function(data){
       client1.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: false});
       setTimeout(disconnect,200);
     });
+    done();
   });
 
   it('Should send a game update upon receiving request to joinGame', function(done) {
     var client1 = io.connect(socketURL, options);
     var disconnect = function() {
       client1.disconnect();
-      done();
     };
     client1.on('connect', function(data){
       client1.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: false});
@@ -38,6 +37,7 @@ describe("Game Server",function(){
       });
       setTimeout(disconnect,200);
     });
+    done();
   });
 
   it('Should announce new user to all users', function(done){
@@ -46,7 +46,6 @@ describe("Game Server",function(){
     var disconnect = function() {
       client1.disconnect();
       client2.disconnect();
-      done();
     };
     client1.on('connect', function(data){
       client1.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: false});
@@ -59,6 +58,7 @@ describe("Game Server",function(){
       });
       setTimeout(disconnect,200);
     });
+    done();
   });
 
   it('Should start game when startGame event is sent with 3 players', function(done){
@@ -68,7 +68,6 @@ describe("Game Server",function(){
       client1.disconnect();
       client2.disconnect();
       client3.disconnect();
-      done();
     };
     var expectStartGame = function() {
       client1.emit('startGame');
@@ -95,6 +94,7 @@ describe("Game Server",function(){
         });
       });
     });
+    done();
   });
 
   it('Should automatically start game when 6 players are in a game', function(done){
@@ -107,7 +107,6 @@ describe("Game Server",function(){
       client4.disconnect();
       client5.disconnect();
       client6.disconnect();
-      done();
     };
     var expectStartGame = function() {
       client1.emit('startGame');
@@ -163,5 +162,6 @@ describe("Game Server",function(){
         }
       });
     });
+    done();
   });
 });
