@@ -30,7 +30,7 @@
     "express": "~3.4.0",
     "express-session": "^1.14.1",
     "forever": "latest",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-cli": "^1.2.2",
     "gulp-bower": "0.0.13",
     "gulp-eslint": "^3.0.1",
